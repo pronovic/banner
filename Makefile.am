@@ -26,12 +26,12 @@
 # Language : N/A
 # Project  : banner
 # Package  : N/A
-# Revision : $Revision: 1.2 $
+# Revision : $Revision: 1.3 $
 # Purpose  : Input to automake for project
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-AUTOMAKE_OPTIONS = foreign
+AUTOMAKE_OPTIONS = foreign no-dependencies 
 INCLUDES = -I@srcdir@
 bin_PROGRAMS = banner
 banner_SOURCES = banner.c banner.h letters.h
