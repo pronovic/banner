@@ -94,12 +94,6 @@
 /** Spaces between letters will be this many, well, spaces. */
 #define SPACE_WIDTH       (2)
 
-/** For now, we'll  just only print this many characters of a banner. 
-  * This depends on average character width, so that's why it's set here. 
-  * Solaris banner only allows 10 characters, and that seems to work OK.
-  */
-#define MAX_PRINT_LETTERS (10)
-
 /** Character 'A' */
 char *char_a[] =   
 { "   #   ",

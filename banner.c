@@ -25,7 +25,7 @@
  * Author   : Kenneth J. Pronovici <pronovic@ieee.org>
  * Language : ANSI C
  * Project  : banner
- * Revision : $Id$
+ * Revision : $Id: banner.c 387 2004-04-17 21:23:50Z pronovic $
  * Purpose  : Main routine and function definitions.
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -93,12 +93,12 @@
   * It's pretty configurable on a compile-time basis.  The letter definitions
   * can be changed by changing the array definitions in "letters.h".  The
   * defined letter height, the number of spaces after each letter, the max
-  * letters of a given string that will be printed, etc. are all controlled from
-  * in there.  The only real restriction is that all of the letters have to be
-  * the same height.  Note, however, that there is no facility for printing
-  * lower-case letters - as far as I can remember, Solaris and AIX don't have
-  * that, and I didn't feel like putting it in.  Adding it would be easy, if you
-  * want to come up with letter definitions for the lower-case letters.
+  * width of a banner to be printed, etc. are all controlled from in there.
+  * The only real restriction is that all of the letters have to be the same
+  * height.  Note, however, that there is no facility for printing lower-case
+  * letters - as far as I can remember, Solaris and AIX don't have that, and I
+  * didn't feel like putting it in.  Adding it would be easy, if you want to
+  * come up with letter definitions for the lower-case letters.
   *
   * I could have made the add_to_banner() function prettier if I wanted to just
   * key off of ASCII value rather than having hardcoded names for each
@@ -133,43 +133,69 @@
   Macro defintions
  *******************/
 
-/** Initial size of banner array */
-#define INITIAL_SIZE   (10)
+/** Initial size of banner arrays */
+#define INITIAL_SIZE       (10)
+
+/** Default print width (assumed terminal width) */
+#define DEFAULT_PRINTWIDTH (80)
 
 /** Normal exit status */
-#define NORMAL_EXIT    (0)
+#define NORMAL_EXIT        (0)
 
 /** Error exit status */
-#define ERROR_EXIT     (-1)
+#define ERROR_EXIT         (-1)
 
 /** URL of GNU's website */
-#define GNU_URL        ("http://www.gnu.org/")
+#define GNU_URL            ("http://www.gnu.org/")
 
 /** Copyright year range */
-#define COPYRIGHT_DATE ("2000-2004")
+#define COPYRIGHT_DATE     ("2000-2004")
 
 /** Name of author */
-#define AUTHOR         ("Kenneth J. Pronovici")
+#define AUTHOR             ("Kenneth J. Pronovici")
 
 /** Email address of author */
-#define AUTHOR_EMAIL   ("pronovic@ieee.org")
+#define AUTHOR_EMAIL       ("pronovic@ieee.org")
 
 
 /************************
   init_banner subroutine
  ************************/
 /** Does initial memory allocation and clears banner buffer. 
+  * Note: any memory previously allocated to this buffer will be lost (leaked).
   * @param banner    Banner buffer to be initialized.
-  * @param height    Height of letters in banner.
   */
 
-static void init_banner(char **banner, int height)
+static void init_banner(char **banner)
 {
    int i = 0;
  
-   for(i=0; i<height; i++)
+   for(i=0; i<LETTER_HEIGHT; i++)
    {
       banner[i] = (char *)calloc(1, INITIAL_SIZE*sizeof(char));
+   }
+}
+
+
+/************************
+  free_banner subroutine
+ ************************/
+/** Frees memory allocated by init_banner().
+  * The array itself is not freed, only the allocations for the individual elements.
+  * @param banner    Banner buffer to be freed.
+  */
+
+static void free_banner(char **banner)
+{
+   int i = 0;
+ 
+   for(i=0; i<LETTER_HEIGHT; i++)
+   {
+      if(banner[i] != NULL)
+      {
+         free(banner[i]);
+         banner[i] = NULL;
+      }
    }
 }
 
@@ -207,7 +233,7 @@ static void convert_whitespace(char *string)
    {
       if(isspace(string[i]))
       {
-         string[i] = ' ' ;
+         string[i] = ' ';
       }
    }
 }
@@ -221,13 +247,15 @@ static void convert_whitespace(char *string)
   * @param height    Height of letters
   * @param space     Width (in characters) of space between letters
   * @param letter    Letter to be added to the banner buffer
+  * @param maxwidth  Maximum width of any one banner line
+  * @return Boolean true (1) if output was truncated, boolean false (0) otherwise.
   */
 
-static void add_to_banner(char **banner, int height, int space, char letter)
+static int add_to_banner(char **banner, int height, int space, char letter, int maxwidth)
 {
-
    int i = 0;
    int j = 0;
+   char *previous = NULL;
    char **working_char = NULL;
    int new_length = 0;
 
@@ -442,7 +470,7 @@ static void add_to_banner(char **banner, int height, int space, char letter)
       break;
    default:
       /* If we don't know about it, we'll just ignore it. */
-      return;
+      return(0);
    }
 
    for(i=0; i<height; i++)
@@ -451,13 +479,52 @@ static void add_to_banner(char **banner, int height, int space, char letter)
                    strlen(working_char[i])*sizeof(char) +   /* new character  */
                    space*sizeof(char) +                     /* the spaces     */
                    1;                                       /* \0 character   */
+      
+      if(new_length > maxwidth)
+      {
+         return(1);  /* banner was truncated */
+      }
 
+      previous = banner[i];
       banner[i] = (char *)realloc(banner[i], new_length);
+      if(banner[i] == NULL)
+      {
+         banner[i] = previous;
+         return(1);  /* act as if truncated */
+      } 
+
       strcat(banner[i], working_char[i]);
 
       for(j=0; j<space; j++)
       {
          strcat(banner[i], " ");
+      }
+   }
+
+   return(0);  /* banner was not truncated */
+}
+
+
+/************************
+  fill_banner subroutine
+ ************************/
+/** Fills a banner buffer in based on a string.
+  * @param banner    Banner buffer
+  * @param string    String to be filled into banner buffer
+  * @param maxwidth  Maximum width of any one banner line
+  */
+
+static void fill_banner(char **banner, char *string, int maxwidth)
+{
+   int j = 0;
+   int truncated = 0;
+
+   for(j=0; j<strlen(string); j++)
+   {
+      truncated = add_to_banner(banner, LETTER_HEIGHT, SPACE_WIDTH, string[j], maxwidth);
+      if(truncated)
+      {
+         break;      /* stop looping; the string is too long */
       }
    }
 }
@@ -466,19 +533,22 @@ static void add_to_banner(char **banner, int height, int space, char letter)
 /*************************
   print_banner subroutine
  *************************/
-/** Prints banner buffer to STDOUT.
-  * @param banner    Banner buffer to be printed.
-  * @param height    Height of letters in the banner
+/** Prints a banner buffer.
+  * @param banner    Banner buffer
   */
 
-void print_banner(char **banner, int height)
+static void print_banner(char **banner)
 {
-   int i = 0;
- 
-   for(i=0; i<height; i++)
+   int j = 0;
+
+   printf("\n");
+
+   for(j=0; j<LETTER_HEIGHT; j++)
    {
-      printf("%s\n", banner[i]);
+      printf("%s\n", banner[j]);
    }
+
+   printf("\n");
 }
 
 
@@ -491,27 +561,38 @@ void print_banner(char **banner, int height)
 
 static void usage(char *program)
 {
-   printf("Usage:\t%s [<string> | --help]\n"
+   printf("Usage: %s [string | --help]\n"
           "\n"
-          "Prints a \"banner\" version of a string to STDOUT.  The string may\n"
-          "be as many as %d characters in length; longer strings are truncated.\n"
+          "Prints a \"banner\" version of a string to STDOUT.  If $COLUMNS is\n"
+          "set in the environment, it is taken to be the width of the terminal.\n"
+          "Otherwise, a terminal width of %d characters is assumed, and banners\n"
+          "that do not fit will be truncated.\n"
           "\n"
-          "This is %s %s, last modified $Date: 2003/09/08 22:45:05 $.\n"
+          "This is %s %s, last modified $Date$.\n"
           "Copyright (c) %s %s <%s>.\n"
           "\n"
           "Distributed under the GNU General Public License.\n"
           "See %s for details on the GNU GPL.\n",
-           program, MAX_PRINT_LETTERS,
+           program, DEFAULT_PRINTWIDTH,
            PACKAGE, VERSION, COPYRIGHT_DATE, 
            AUTHOR, AUTHOR_EMAIL, GNU_URL);
-   return;
 }
 
 
 /**************
   Main routine
  **************/
-/** Program main routine. */
+/** Program main routine. 
+  * 
+  * Command-line arguments are handled simplistically: if there are no
+  * arguments, then a usage statement is printed and an error code is returned.
+  * If the first argument is "-h" or "--help", then a usage statement is
+  * displayed.  If the first argument is "--", then it is ignored, which
+  * provides a backwards-compatible way to print a banner containing "--help"
+  * or "-h".  Finally, if we haven't errored out or printed the usage
+  * statement, anything else left on the command-line is considered a word to
+  * be printed as a banner.
+  */
 
 int main(int argc, char *argv[])
 {
@@ -520,89 +601,91 @@ int main(int argc, char *argv[])
      Local variables
     *****************/
 
-   char *string = NULL;
-   char *banner[LETTER_HEIGHT];
    int i = 0;
-   int working_length = 0;
+   int j = 0;
+
+   int wordcount = 0;
+   char **wordlist = NULL;
+
+   char *columns = NULL;
+   int printwidth = 0;
+
+   int truncated = 0;
+   char *banner[LETTER_HEIGHT];
+   char *string = NULL;
 
 
    /******************
      Handle arguments
     ******************/
-   /* 
-      There are several possibilities for arguments.  First, they could use
-      the normal case - just a string.  Second, they could use the "help" case,
-      which is "--help".  Third, they might want to banner-print "--help", in
-      which case argument 1 would be "--" and argument 2 would be "--help".
-
-      Yeah, I could probably have a standard routine process this for me,
-      but this was simpler for the moment (so much for adhering to 
-      standards...).
-   */
 
    if(argc < 2)
    {
       usage(argv[0]);
       exit(ERROR_EXIT);
    }
-   if(argc == 2)
+
+   if(strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0)
    {
-
-      if(strcmp(argv[1], "--help") == 0)
-      {
-         usage(argv[0]);
-         exit(NORMAL_EXIT);   /* not an error */
-      }
-
-      string = (char *)calloc(1, strlen(argv[1])+1);
-      strcpy(string, argv[1]);
-
+      usage(argv[0]);
+      exit(NORMAL_EXIT);   /* not an error */
    }
-   else if (argc == 3)
+   
+   if(strcmp(argv[1], "--") == 0)
    {
-      if  (strcmp(argv[1], "--") == 0 
-        && strcmp(argv[2], "--help") == 0)
-      {
-         string = (char *)calloc(1, strlen(argv[2])+1);
-         strcpy(string, argv[2]);
-      }
-      else
-      {
-         usage(argv[0]);
-         exit(ERROR_EXIT);
-      }
+      wordcount = argc > 2 ? argc - 2 : 0;
+      wordlist = argc > 2 ? argv + 2 : NULL;
    }
-   else if(argc > 3)
+   else
+   {
+      wordcount = argc > 1 ? argc - 1 : 0;
+      wordlist = argc > 1 ? argv + 1 : NULL;
+   }
+
+   if(wordcount < 1)
    {
       usage(argv[0]);
       exit(ERROR_EXIT);
    }
 
 
-   /*******
-     Setup
-    *******/
+   /***********************
+     Determine print width
+    ***********************/
 
-   convert_to_upper(string);
-   convert_whitespace(string);
-   init_banner(banner, LETTER_HEIGHT);
-
-
-   /*************************************
-     Load each character into the banner
-    *************************************/
-
-   for(i=0; i<strlen(string) && i<MAX_PRINT_LETTERS; i++)
+   columns = getenv("COLUMNS");
+   if(columns == NULL)
    {
-      add_to_banner(banner, LETTER_HEIGHT, SPACE_WIDTH, string[i]);
+      printwidth = DEFAULT_PRINTWIDTH;
+   }
+   else
+   {
+      printwidth = atoi(columns);
    }
 
 
-   /*************************************
-     And, print the banner out to STDOUT
-    *************************************/
+   /******************************
+     Print a banner for each word
+    ******************************/
 
-   print_banner(banner, LETTER_HEIGHT);
+   for(i=0; i<wordcount; i++)
+   {
+      string = wordlist[i];
+      convert_to_upper(string);
+      convert_whitespace(string);
+
+      init_banner(banner);
+      fill_banner(banner, string, printwidth);
+      print_banner(banner);
+      free_banner(banner);
+   }
+
+
+   /*****************
+     Return normally
+    *****************/
+
+   return(0);
 
 }
 
