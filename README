@@ -1,0 +1,40 @@
+I've used a lot of different UN*X systems, and all of them, as far as I can 
+tell, seem to provide a "banner" program that prints some short string in 
+large letters.  Except Linux.  I can't seem to find something like that 
+anywhere (well, there is /usr/games/banner, but that's different than a 
+typical banner implementation).  So, since it's such a simplistic thing 
+to do, I wrote it myself.
+
+The 'banner' program prints a "banner" on the screen that corresponds to the 
+first X characters of a string entered on the command line. 
+
+Say you'd like to print "KEN" in big letters.  Use:
+
+   banner ken
+
+and you'll get back:
+
+   #    #  #######  #     #
+   #   #   #        ##    #
+   #  #    #        # #   #
+   ###     #####    #  #  #
+   #  #    #        #   # #
+   #   #   #        #    ##
+   #    #  #######  #     #
+
+It's pretty configurable.  The letter definitions can be changed by changing 
+the array definitions in "letters.h".  The defined letter height, the number 
+of spaces after each letter, the max letters of a given string that will be 
+printed, etc. are all controlled from in there.  The only real restriction is 
+that all of the letters have to be the same height.  Note, however, that there 
+is no facility for printing lower-case letters - as far as I can remember, 
+Solaris and AIX don't have that, and I didn't feel like putting it in.  Adding 
+it would be easy, if you want to come up with letter definitions for the 
+lower-case letters.
+
+Yeah, yeah, this IS a pretty simple program, and it doesn't really need a GNU 
+autoconf setup and all that stuff - it's just ANSI C.  This just gave me an 
+excuse to learn autoconf... ;-)
+
+KJP 06/11/2000
+ 
