@@ -1,32 +1,32 @@
 dnl # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-dnl #                                                                   #
-dnl #            C  E  D  A  R                                          #
-dnl #          S O L U T I O N S       "Software done right."           #
-dnl #               I  N  C.                                            #
-dnl #                                                                   #
-dnl # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-dnl #                                                                   #
-dnl # Copyright (c) 2001 Cedar Solutions, Inc.                          #
-dnl # All rights reserved.                                              #
-dnl #                                                                   #
-dnl # This program is free software; you can redistribute it and/or     #
-dnl # modify it under the terms of the GNU General Public License,      #
-dnl # Version 2, as published by the Free Software Foundation.          #
-dnl #                                                                   #
-dnl # This program is distributed in the hope that it will be useful,   #
-dnl # but WITHOUT ANY WARRANTY; without even the implied warranty of    #
-dnl # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.              #
-dnl #                                                                   #
-dnl # Copies of the GNU General Public License are available from       #
-dnl # the Free Software Foundation website, http://www.gnu.org/.        #
-dnl #                                                                   #
+dnl #
+dnl #              C E D A R
+dnl #          S O L U T I O N S       "Software done right."
+dnl #           S O F T W A R E
+dnl #
 dnl # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 dnl #
-dnl # Author   : Kenneth J. Pronovici
+dnl # Copyright (c) 2000-2003 Kenneth J. Pronovici.
+dnl # All rights reserved.
+dnl #
+dnl # This program is free software; you can redistribute it and/or
+dnl # modify it under the terms of the GNU General Public License,
+dnl # Version 2, as published by the Free Software Foundation.
+dnl #
+dnl # This program is distributed in the hope that it will be useful,
+dnl # but WITHOUT ANY WARRANTY; without even the implied warranty of
+dnl # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+dnl #
+dnl # Copies of the GNU General Public License are available from
+dnl # the Free Software Foundation website, http://www.gnu.org/.
+dnl #
+dnl # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+dnl #
+dnl # Author   : Kenneth J. Pronovici <pronovic@ieee.org>
 dnl # Language : N/A
 dnl # Project  : banner
 dnl # Package  : N/A
-dnl # Revision : $Id: configure.in,v 1.5 2002/04/04 20:25:59 pronovic Exp $
+dnl # Revision : $Id: configure.in,v 1.7 2003/09/08 22:39:10 pronovic Exp $
 dnl # Purpose  : Autoconf configure source script.
 dnl #
 dnl # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -35,7 +35,7 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(banner.c)
 
-AM_INIT_AUTOMAKE(banner, 1.2.1)
+AM_INIT_AUTOMAKE(banner, 1.2.2)
 AM_CONFIG_HEADER(config.h)
 
 AC_SUBST(PACKAGE_NAME)

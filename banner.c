@@ -1,32 +1,31 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *                                                                   *
- *            C  E  D  A  R                                          *
- *          S O L U T I O N S       "Software done right."           *
- *               I  N  C.                                            *
- *                                                                   *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *                                                                   *
- * Copyright (c) 2001 Cedar Solutions, Inc.                          *
- * All rights reserved.                                              *
- *                                                                   *
- * This program is free software; you can redistribute it and/or     *
- * modify it under the terms of the GNU General Public License,      *
- * Version 2, as published by the Free Software Foundation.          *
- *                                                                   *
- * This program is distributed in the hope that it will be useful,   *
- * but WITHOUT ANY WARRANTY; without even the implied warranty of    *
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.              *
- *                                                                   *
- * Copies of the GNU General Public License are available from       *
- * the Free Software Foundation website, http://www.gnu.org/.        *
- *                                                                   *
+ *
+ *              C E D A R
+ *          S O L U T I O N S       "Software done right."
+ *           S O F T W A R E
+ *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *
- * Author   : Kenneth J. Pronovici
+ * Copyright (c) 2000-2003 Kenneth J. Pronovici.
+ * All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License,
+ * Version 2, as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * Copies of the GNU General Public License are available from
+ * the Free Software Foundation website, http://www.gnu.org/.
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ * Author   : Kenneth J. Pronovici <pronovic@ieee.org>
  * Language : ANSI C
  * Project  : banner
- * Package  : N/A
- * Revision : $Id: banner.c,v 1.4 2002/04/04 20:25:59 pronovic Exp $
+ * Revision : $Id: banner.c,v 1.7 2003/09/08 22:45:05 pronovic Exp $
  * Purpose  : Main routine and function definitions
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -36,19 +35,18 @@
  *******/
 
 /*
-   I've used a lot of different UN*X systems, and all of them, as 
-   far as I can tell, seem to provide a "banner" program that prints
-   some short string in large letters.  Except Linux.  I can't seem
-   to find something like that anywhere (well, there is /usr/games/banner,
-   but that's different than a typical banner implementation).  So, since 
-   it's such a simplistic thing to do, I wrote it myself.
+   I've used a lot of different UN*X systems, and all of them, as far as I can
+   tell, seem to provide a "banner" program that prints some short string in
+   large letters.  Except Linux.  When I wrote this, I couldn't seem to find
+   something like this anywhere (well, there is /usr/games/banner, but that's
+   different than a typical banner implementation).  So, since it was such a
+   simplistic thing to do, I wrote it myself.
 
-   The 'banner' program prints a "banner" on the screen that corresponds 
-   to the first X characters of a string entered on the command line. 
+   The 'banner' program prints a "banner" on the screen that corresponds to the
+   first X characters of a string entered on the command line. 
 
-   Say we're printing "AB"... we make one call per character
-   and build an array of strings from the top down.  The first time
-   through, we'll have this:
+   Say we're printing "AB"... we make one call per character and build an array
+   of strings from the top down.  The first time through, we'll have this:
 
       banner[0] = "   #     "
       banner[1] = "  # #    "
@@ -68,29 +66,29 @@
       banner[5] = "#     #  #     #  "
       banner[6] = "#     #  ######   "
 
-   i.e. the first line of the "B" array is concatenated onto the 
-   first line of the "A" array, the second onto the second, etc.
-   to make the complete banner, line by line from top to bottom.
-   The string is then printed top to bottom.
+   i.e. the first line of the "B" array is concatenated onto the first line of
+   the "A" array, the second onto the second, etc.  to make the complete
+   banner, line by line from top to bottom.  The string is then printed top to
+   bottom.
 
-   It's pretty configurable.  The letter definitions can be changed
-   by changing the array definitions in "letters.h".  The defined
-   letter height, the number of spaces after each letter, the max
-   letters of a given string that will be printed, etc. are all
-   controlled from in there.  The only real restriction is that all
-   of the letters have to be the same height.  Note, however, that 
-   there is no facility for printing lower-case letters - as far as
-   I can remember, Solaris and AIX don't have that, and I didn't feel
-   like putting it in.  Adding it would be easy, if you want to come up
-   with letter definitions for the lower-case letters.
+   It's pretty configurable on a compile-time basis.  The letter definitions
+   can be changed by changing the array definitions in "letters.h".  The
+   defined letter height, the number of spaces after each letter, the max
+   letters of a given string that will be printed, etc. are all controlled from
+   in there.  The only real restriction is that all of the letters have to be
+   the same height.  Note, however, that there is no facility for printing
+   lower-case letters - as far as I can remember, Solaris and AIX don't have
+   that, and I didn't feel like putting it in.  Adding it would be easy, if you
+   want to come up with letter definitions for the lower-case letters.
  
-   I could have made the add_to_banner() function prettier if I wanted
-   to just key off of ASCII value rather than having hardcoded names
-   for each letter/character.  I decided that keying off ASCII values
-   would not be flexible enough.  If you want to optimize it, feel 
-   free, and then write me and let me know.
+   I could have made the add_to_banner() function prettier if I wanted to just
+   key off of ASCII value rather than having hardcoded names for each
+   letter/character.  I decided that keying off ASCII values would not be
+   flexible enough.  If you want to optimize it, feel free, and then write me
+   and let me know.
 
    KJP 06/11/2000
+       09/08/2003
 */
 
 
@@ -254,8 +252,12 @@ void convert_to_upper(char *string)
 
 void usage(char *program)
 {
-   printf("Usage:\t%s \"string to print... (max %d characters)\" [--help]\n"
-          "\nThis is %s %s, last modified $Date: 2002/04/04 20:25:59 $.\n"
+   printf("Usage:\t%s [<string> | --help]\n"
+          "\n"
+          "Prints a \"banner\" version of a string to STDOUT.  The string may\n"
+          "be as many as %d characters in length; longer strings are truncated.\n"
+          "\n"
+          "This is %s %s, last modified $Date: 2003/09/08 22:45:05 $.\n"
           "Copyright (c) %s %s <%s>.\n"
           "Distributed under the GNU General Public License.\n"
           "See %s for details on the GNU GPL.\n",

@@ -1,9 +1,25 @@
-I've used a lot of different UN*X systems, and all of them, as far as I can 
-tell, seem to provide a "banner" program that prints some short string in 
-large letters.  Except Linux.  I can't seem to find something like that 
-anywhere (well, there is /usr/games/banner, but that's different than a 
-typical banner implementation).  So, since it's such a simplistic thing 
-to do, I wrote it myself.
+# vim: set ft=text80:
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#
+#              C E D A R
+#          S O L U T I O N S       "Software done right."
+#           S O F T W A R E
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#
+# Author   : Kenneth J. Pronovici <pronovic@ieee.org>
+# Project  : banner
+# Revision : $Id: README,v 1.4 2003/09/08 23:00:39 pronovic Exp $
+# Purpose  : README for the banner program
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+I've used a lot of different UN*X systems, and all of them, as far as I can
+tell, seem to provide a "banner" program that prints some short string in large
+letters.  Except Linux.  When I wrote this, I couldn't seem to find something
+like this anywhere (well, there is /usr/games/banner, but that's different than
+a typical banner implementation).  So, since it was such a simplistic thing to
+do, I wrote it myself.  
 
 The 'banner' program prints a "banner" on the screen that corresponds to the 
 first X characters of a string entered on the command line. 
@@ -22,19 +38,40 @@ and you'll get back:
    #   #   #        #    ##
    #    #  #######  #     #
 
-It's pretty configurable.  The letter definitions can be changed by changing 
-the array definitions in "letters.h".  The defined letter height, the number 
-of spaces after each letter, the max letters of a given string that will be 
-printed, etc. are all controlled from in there.  The only real restriction is 
-that all of the letters have to be the same height.  Note, however, that there 
-is no facility for printing lower-case letters - as far as I can remember, 
-Solaris and AIX don't have that, and I didn't feel like putting it in.  Adding 
-it would be easy, if you want to come up with letter definitions for the 
-lower-case letters.
+It's pretty configurable on a compile-time basis.  The letter definitions can
+be changed by changing the array definitions in "letters.h".  The defined
+letter height, the number of spaces after each letter, the max letters of a
+given string that will be printed, etc. are all controlled from in there.  The
+only real restriction is that all of the letters have to be the same height.
+Note, however, that there is no facility for printing lower-case letters - as
+far as I can remember, Solaris and AIX don't have that, and I didn't feel like
+putting it in.  Adding it would be easy, if you want to come up with letter
+definitions for the lower-case letters.
 
 Yeah, yeah, this IS a pretty simple program, and it doesn't really need a GNU 
 autoconf setup and all that stuff - it's just ANSI C.  This just gave me an 
-excuse to learn autoconf... ;-)
+excuse to learn autoconf... ;-)   
+
+Note that since I haven't updated this much recently, it probably will only
+work with older (obsolete?) versions of Automake and Autoconf.  I have
+built the latest 1.2.2 distribution using Automake v1.4 and Autoconf v2.13
+under Debian 'sarge':
+
+   aclocal; automake; autoconf; ./configure; make dist; make distclean
+
+I don't think you'll have any success re-generating things with newer
+versions of these tools, but if you do, please let me know.
+
+I have successfully built this program under various versions of Linux, as
+well as Solaris 2.8 and AIX 4.3.  Under my install of AIX, it looks like
+you need to use:
+
+   CC='cc -L/usr/lib' ./configure
+
+in order for things to work properly.  I suspect this is a problem with the
+way the compiler is configured on my machine, but it might help you if you
+have problems there.
 
 KJP 06/11/2000
- 
+    09/08/2003
+
