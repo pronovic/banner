@@ -1,34 +1,38 @@
-dnl #######################################################################
-dnl 
-dnl  CONFIGURE - Autoconf configuration file for 'banner' program
-dnl 
-dnl #######################################################################
-dnl 
-dnl $GNU_Copyright-Start$
-dnl 
-dnl Copyright (C) 1998 Kenneth J. Pronovici
-dnl
-dnl This program is free software; you can redistribute it and/or
-dnl modify it under the terms of the GNU General Public License
-dnl as published by the Free Software Foundation; either version 2
-dnl of the License, or (at your option) any later version.
-dnl 
-dnl This program is distributed in the hope that it will be useful,
-dnl but WITHOUT ANY WARRANTY; without even the implied warranty of
-dnl MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-dnl GNU General Public License for more details.
-dnl 
-dnl You should have received a copy of the GNU General Public License
-dnl along with this program; if not, write to the Free Software
-dnl Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA
-dnl 
-dnl $GNU_Copyright-End$
-dnl 
-dnl $Id: configure.in,v 1.1 2001/08/30 21:46:44 pronovic Exp $
-dnl 
-dnl #######################################################################
+dnl # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+dnl #                                                                   #
+dnl #            C  E  D  A  R                                          #
+dnl #          S O L U T I O N S       "Software done right."           #
+dnl #               I  N  C.                                            #
+dnl #                                                                   #
+dnl # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+dnl #                                                                   #
+dnl # Copyright (c) 2001 Cedar Solutions, Inc.                          #
+dnl # All rights reserved.                                              #
+dnl #                                                                   #
+dnl # This program is free software; you can redistribute it and/or     #
+dnl # modify it under the terms of the GNU General Public License,      #
+dnl # Version 2, as published by the Free Software Foundation.          #
+dnl #                                                                   #
+dnl # This program is distributed in the hope that it will be useful,   #
+dnl # but WITHOUT ANY WARRANTY; without even the implied warranty of    #
+dnl # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.              #
+dnl #                                                                   #
+dnl # Copies of the GNU General Public License are available from       #
+dnl # the Free Software Foundation website, http://www.gnu.org/.        #
+dnl #                                                                   #
+dnl # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+dnl #
+dnl # Author   : Kenneth J. Pronovici
+dnl # Language : N/A
+dnl # Project  : banner
+dnl # Package  : N/A
+dnl # Revision : $Revision: 1.2 $
+dnl # Purpose  : Autoconf configure source script.
+dnl #
+dnl # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 dnl Process this file with autoconf to produce a configure script.
+
 AC_INIT(banner.c)
 AM_INIT_AUTOMAKE(banner, 1.2)
 AM_CONFIG_HEADER(config.h)
