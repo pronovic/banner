@@ -20,7 +20,7 @@
 #
 # Author   : Kenneth J. Pronovici <pronovic@ieee.org>
 # Project  : banner
-# Revision : $Id: Makefile.am 385 2004-04-17 21:17:00Z pronovic $
+# Revision : $Id: Makefile.am 398 2004-05-24 01:59:06Z pronovic $
 # Purpose  : Input to automake for project
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

@@ -2,6 +2,7 @@
 
 	* Allow more than one word to be printed (closes: #11).
 	* Now restrict print width based on terminal rather than fixed value.
+	* Project is no longer "foreign" from perspective of auto-tools.
 
 1.3.0		17 Apr 2004
 
