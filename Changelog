@@ -1,8 +1,10 @@
-1.2.3		17 Apr 2004
+1.3.0		17 Apr 2004
 
-	* Add support for whitespace in output (closes: #10).
-	* Convert all 'long' variable to 'int' instead.
-	* Use tabs in Changelog to match Vim's syntax file.
+	* Fully Doxygenated all source files.
+	* Complete code reorganization; removed banner.h.
+	* Converted all 'long' variables to 'int' instead.
+	* Now use tabs in Changelog to match Vim's syntax file.
+	* Added support for whitespace in output (closes: #10).
 
 1.2.2    08 Sep 2003
 
