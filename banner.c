@@ -6,7 +6,7 @@
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *
- * Copyright (c) 2000-2003 Kenneth J. Pronovici.
+ * Copyright (c) 2000-2004 Kenneth J. Pronovici.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or
@@ -25,28 +25,41 @@
  * Author   : Kenneth J. Pronovici <pronovic@ieee.org>
  * Language : ANSI C
  * Project  : banner
- * Revision : $Id: banner.c,v 1.7 2003/09/08 22:45:05 pronovic Exp $
- * Purpose  : Main routine and function definitions
+ * Revision : $Id$
+ * Purpose  : Main routine and function definitions.
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/*******
-  Notes
- *******/
+/********************
+  File documentation
+ ********************/
 
-/*
-   I've used a lot of different UN*X systems, and all of them, as far as I can
-   tell, seem to provide a "banner" program that prints some short string in
-   large letters.  Except Linux.  When I wrote this, I couldn't seem to find
-   something like this anywhere (well, there is /usr/games/banner, but that's
-   different than a typical banner implementation).  So, since it was such a
-   simplistic thing to do, I wrote it myself.
+/** @file
+  * @author Kenneth J. Pronovici
+  * @brief  Main routine and function definitions.
+  */
 
-   The 'banner' program prints a "banner" on the screen that corresponds to the
-   first X characters of a string entered on the command line. 
 
-   Say we're printing "AB"... we make one call per character and build an array
-   of strings from the top down.  The first time through, we'll have this:
+/***********************************
+  Doxygen "main page" documentation 
+ ***********************************/
+
+/** @mainpage Banner Program
+  *
+  * I've used a lot of different UN*X systems, and all of them, as far as I can
+  * tell, seem to provide a "banner" program that prints some short string in
+  * large letters.  Except Linux.  When I wrote this, I couldn't seem to find
+  * something like this anywhere (well, there is @c /usr/games/banner, but that's
+  * different than a typical banner implementation).  So, since it was such a
+  * simplistic thing to do, I wrote it myself.
+  *
+  * The 'banner' program prints a "banner" on the screen that corresponds to the
+  * first X characters of a string entered on the command line. 
+  *
+  * Say we're printing "AB"... we make one call per character and build an array
+  * of strings from the top down.  The first time through, we'll have this:
+  *
+    @verbatim
 
       banner[0] = "   #     "
       banner[1] = "  # #    "
@@ -56,7 +69,11 @@
       banner[5] = "#     #  "
       banner[6] = "#     #  "
  
-   the second time through, we'll have this:
+    @endverbatim
+  *
+  * the second time through, we'll have this:
+  *
+    @verbatim
       
       banner[0] = "   #     ######   "
       banner[1] = "  # #    #     #  "
@@ -66,166 +83,92 @@
       banner[5] = "#     #  #     #  "
       banner[6] = "#     #  ######   "
 
-   i.e. the first line of the "B" array is concatenated onto the first line of
-   the "A" array, the second onto the second, etc.  to make the complete
-   banner, line by line from top to bottom.  The string is then printed top to
-   bottom.
-
-   It's pretty configurable on a compile-time basis.  The letter definitions
-   can be changed by changing the array definitions in "letters.h".  The
-   defined letter height, the number of spaces after each letter, the max
-   letters of a given string that will be printed, etc. are all controlled from
-   in there.  The only real restriction is that all of the letters have to be
-   the same height.  Note, however, that there is no facility for printing
-   lower-case letters - as far as I can remember, Solaris and AIX don't have
-   that, and I didn't feel like putting it in.  Adding it would be easy, if you
-   want to come up with letter definitions for the lower-case letters.
- 
-   I could have made the add_to_banner() function prettier if I wanted to just
-   key off of ASCII value rather than having hardcoded names for each
-   letter/character.  I decided that keying off ASCII values would not be
-   flexible enough.  If you want to optimize it, feel free, and then write me
-   and let me know.
-
-   KJP 06/11/2000
-       09/08/2003
-*/
+    @endverbatim
+  *
+  * i.e. the first line of the "B" array is concatenated onto the first line of
+  * the "A" array, the second onto the second, etc.  to make the complete
+  * banner, line by line from top to bottom.  The string is then printed top to
+  * bottom.
+  *
+  * It's pretty configurable on a compile-time basis.  The letter definitions
+  * can be changed by changing the array definitions in "letters.h".  The
+  * defined letter height, the number of spaces after each letter, the max
+  * letters of a given string that will be printed, etc. are all controlled from
+  * in there.  The only real restriction is that all of the letters have to be
+  * the same height.  Note, however, that there is no facility for printing
+  * lower-case letters - as far as I can remember, Solaris and AIX don't have
+  * that, and I didn't feel like putting it in.  Adding it would be easy, if you
+  * want to come up with letter definitions for the lower-case letters.
+  *
+  * I could have made the add_to_banner() function prettier if I wanted to just
+  * key off of ASCII value rather than having hardcoded names for each
+  * letter/character.  I decided that keying off ASCII values would not be
+  * flexible enough.  If you want to optimize it, feel free, and then write me
+  * and let me know.
+  *
+  * @author Kenneth J. Pronovici
+  */
 
 
 /****************
   Included files
  ****************/
 
-#include "banner.h"
+#include <stdio.h>
+
+#ifdef HAVE_STDLIB_H
+   #include <stdlib.h>
+#endif
+
+#ifdef HAVE_STRING_H
+   #include <string.h>
+#endif
+
+#include "letters.h"
+#include "config.h"
 
 
-/**************
-  Main routine
- **************/
+/******************
+  Macro defintions
+ *******************/
 
-int main(int argc, char *argv[])
-{
+/** Initial size of banner array */
+#define INITIAL_SIZE   (10)
 
-   /*****************
-     Local variables
-    *****************/
+/** Normal exit status */
+#define NORMAL_EXIT    (0)
 
-   char *string = NULL;
-   char *banner[BANNER_LETTER_HEIGHT];
-   long i = 0;
-   long working_length = 0;
+/** Error exit status */
+#define ERROR_EXIT     (-1)
 
+/** URL of GNU's website */
+#define GNU_URL        ("http://www.gnu.org/")
 
-   /******************
-     Handle arguments
-    ******************/
-   /* 
-      There are several possibilities for arguments.  First, they could use
-      the normal case - just a string.  Second, they could use the "help" case,
-      which is "--help".  Third, they might want to banner-print "--help", in
-      which case argument 1 would be "--" and argument 2 would be "--help".
+/** Copyright year range */
+#define COPYRIGHT_DATE ("2000-2004")
 
-      Yeah, I could probably have a standard routine process this for me,
-      but this was simpler for the moment (so much for adhering to 
-      standards...).
-   */
+/** Name of author */
+#define AUTHOR         ("Kenneth J. Pronovici")
 
-   if(argc < 2)
-   {
-      usage(argv[0]);
-      exit(BANNER_ERROR_EXIT);
-   }
-   if(argc == 2)
-   {
-
-      if(strcmp(argv[1], BANNER_ARG_HELP_STR) == 0)
-      {
-         usage(argv[0]);
-         exit(BANNER_NORMAL_EXIT);   /* not an error */
-      }
-
-      string = (char *)calloc(1, strlen(argv[1])+1);
-      strcpy(string, argv[1]);
-
-   }
-   else if (argc == 3)
-   {
-      if  (strcmp(argv[1], BANNER_ARG_IGNORE_STR) == 0 
-        && strcmp(argv[2], BANNER_ARG_HELP_STR) == 0)
-      {
-         string = (char *)calloc(1, strlen(argv[2])+1);
-         strcpy(string, argv[2]);
-      }
-      else
-      {
-         usage(argv[0]);
-         exit(BANNER_ERROR_EXIT);
-      }
-   }
-   else if(argc > 3)
-   {
-      usage(argv[0]);
-      exit(BANNER_ERROR_EXIT);
-   }
-
-
-   /*******
-     Setup
-    *******/
-
-   convert_to_upper(string);
-   init_banner(banner, BANNER_LETTER_HEIGHT);
-
-
-   /*************************************
-     Load each character into the banner
-    *************************************/
-
-   for(i=0; i<strlen(string) && i<BANNER_MAX_PRINT_LETTERS; i++)
-   {
-      add_to_banner(banner, 
-                    BANNER_LETTER_HEIGHT, BANNER_SPACE_WIDTH, 
-                    string[i]);
-   }
-
-
-   /*************************************
-     And, print the banner out to STDOUT
-    *************************************/
-
-   print_banner(banner, BANNER_LETTER_HEIGHT);
-
-}
-
-
-/*************************
-  print_banner subroutine
- *************************/
-/* Prints banner buffer to STDOUT. */
-
-void print_banner(char **banner, long height)
-{
-   int i = 0;
- 
-   for(i=0; i<height; i++)
-   {
-      printf("%s\n", banner[i]);
-   }
-}
+/** Email address of author */
+#define AUTHOR_EMAIL   ("pronovic@ieee.org")
 
 
 /************************
   init_banner subroutine
  ************************/
-/* Does initial memory allocation and clears banner buffer. */
+/** Does initial memory allocation and clears banner buffer. 
+  * @param banner    Banner buffer to be initialized.
+  * @param height    Height of letters in banner.
+  */
 
-void init_banner(char **banner, long height)
+static void init_banner(char **banner, int height)
 {
    int i = 0;
  
    for(i=0; i<height; i++)
    {
-      banner[i] = (char *)calloc(1, BANNER_DEF_SIZE*sizeof(char));
+      banner[i] = (char *)calloc(1, INITIAL_SIZE*sizeof(char));
    }
 }
 
@@ -233,11 +176,13 @@ void init_banner(char **banner, long height)
 /******************************
   convert_to_upper subroutine
  ******************************/
-/* Destructively converts a string to all UPPER-CASE letters. */
+/** Destructively converts a string to all UPPER-CASE letters. 
+  * @param string    String to be converted.
+  */
 
-void convert_to_upper(char *string)
+static void convert_to_upper(char *string)
 {
-   long i = 0;
+   int i = 0;
    
    for(i=0; i<strlen(string); i++)
    {
@@ -246,41 +191,44 @@ void convert_to_upper(char *string)
 }
 
 
-/******************
-  usage subroutine
- ******************/
+/*******************************
+  convert_whitespace subroutine
+ *******************************/
+/** Destructively converts all whitespace characters to space characters.
+  * @param string    String to be converted.
+  */
 
-void usage(char *program)
+static void convert_whitespace(char *string)
 {
-   printf("Usage:\t%s [<string> | --help]\n"
-          "\n"
-          "Prints a \"banner\" version of a string to STDOUT.  The string may\n"
-          "be as many as %d characters in length; longer strings are truncated.\n"
-          "\n"
-          "This is %s %s, last modified $Date: 2003/09/08 22:45:05 $.\n"
-          "Copyright (c) %s %s <%s>.\n"
-          "Distributed under the GNU General Public License.\n"
-          "See %s for details on the GNU GPL.\n",
-           program, BANNER_MAX_PRINT_LETTERS,
-           PACKAGE, VERSION,
-           BANNER_COPYRIGHT_DATE, BANNER_AUTHOR, 
-           BANNER_AUTHOR_EMAIL, BANNER_GNU_URL);
-   return;
+   int i = 0;
+   
+   for(i=0; i<strlen(string); i++)
+   {
+      if(isspace(string[i]))
+      {
+         string[i] = ' ' ;
+      }
+   }
 }
 
 
 /**************************
   add_to_banner subroutine
  **************************/
-/* This tacks together the pieces into a complete banner.  */
+/** Tacks a letter into a banner buffer.
+  * @param banner    Banner buffer
+  * @param height    Height of letters
+  * @param space     Width (in characters) of space between letters
+  * @param letter    Letter to be added to the banner buffer
+  */
 
-void add_to_banner(char **banner, long height, long space, char letter)
+static void add_to_banner(char **banner, int height, int space, char letter)
 {
 
-   long i = 0;
-   long j = 0;
+   int i = 0;
+   int j = 0;
    char **working_char = NULL;
-   long new_length = 0;
+   int new_length = 0;
 
    switch(letter)
    {
@@ -488,6 +436,9 @@ void add_to_banner(char **banner, long height, long space, char letter)
    case '-':
       working_char = char_dash;
       break;
+   case ' ':
+      working_char = char_spac;
+      break;
    default:
       /* If we don't know about it, we'll just ignore it. */
       return;
@@ -505,8 +456,152 @@ void add_to_banner(char **banner, long height, long space, char letter)
 
       for(j=0; j<space; j++)
       {
-         strcat(banner[i], BANNER_SPACE_STR);
+         strcat(banner[i], " ");
       }
    }
+}
+
+
+/*************************
+  print_banner subroutine
+ *************************/
+/** Prints banner buffer to STDOUT.
+  * @param banner    Banner buffer to be printed.
+  * @param height    Height of letters in the banner
+  */
+
+void print_banner(char **banner, int height)
+{
+   int i = 0;
+ 
+   for(i=0; i<height; i++)
+   {
+      printf("%s\n", banner[i]);
+   }
+}
+
+
+/******************
+  usage subroutine
+ ******************/
+/** Provides usage information for the program.
+  * @param program   Name program was invoked with.
+  */
+
+static void usage(char *program)
+{
+   printf("Usage:\t%s [<string> | --help]\n"
+          "\n"
+          "Prints a \"banner\" version of a string to STDOUT.  The string may\n"
+          "be as many as %d characters in length; longer strings are truncated.\n"
+          "\n"
+          "This is %s %s, last modified $Date: 2003/09/08 22:45:05 $.\n"
+          "Copyright (c) %s %s <%s>.\n"
+          "\n"
+          "Distributed under the GNU General Public License.\n"
+          "See %s for details on the GNU GPL.\n",
+           program, MAX_PRINT_LETTERS,
+           PACKAGE, VERSION, COPYRIGHT_DATE, 
+           AUTHOR, AUTHOR_EMAIL, GNU_URL);
+   return;
+}
+
+
+/**************
+  Main routine
+ **************/
+/** Program main routine. */
+
+int main(int argc, char *argv[])
+{
+
+   /*****************
+     Local variables
+    *****************/
+
+   char *string = NULL;
+   char *banner[LETTER_HEIGHT];
+   int i = 0;
+   int working_length = 0;
+
+
+   /******************
+     Handle arguments
+    ******************/
+   /* 
+      There are several possibilities for arguments.  First, they could use
+      the normal case - just a string.  Second, they could use the "help" case,
+      which is "--help".  Third, they might want to banner-print "--help", in
+      which case argument 1 would be "--" and argument 2 would be "--help".
+
+      Yeah, I could probably have a standard routine process this for me,
+      but this was simpler for the moment (so much for adhering to 
+      standards...).
+   */
+
+   if(argc < 2)
+   {
+      usage(argv[0]);
+      exit(ERROR_EXIT);
+   }
+   if(argc == 2)
+   {
+
+      if(strcmp(argv[1], "--help") == 0)
+      {
+         usage(argv[0]);
+         exit(NORMAL_EXIT);   /* not an error */
+      }
+
+      string = (char *)calloc(1, strlen(argv[1])+1);
+      strcpy(string, argv[1]);
+
+   }
+   else if (argc == 3)
+   {
+      if  (strcmp(argv[1], "--") == 0 
+        && strcmp(argv[2], "--help") == 0)
+      {
+         string = (char *)calloc(1, strlen(argv[2])+1);
+         strcpy(string, argv[2]);
+      }
+      else
+      {
+         usage(argv[0]);
+         exit(ERROR_EXIT);
+      }
+   }
+   else if(argc > 3)
+   {
+      usage(argv[0]);
+      exit(ERROR_EXIT);
+   }
+
+
+   /*******
+     Setup
+    *******/
+
+   convert_to_upper(string);
+   convert_whitespace(string);
+   init_banner(banner, LETTER_HEIGHT);
+
+
+   /*************************************
+     Load each character into the banner
+    *************************************/
+
+   for(i=0; i<strlen(string) && i<MAX_PRINT_LETTERS; i++)
+   {
+      add_to_banner(banner, LETTER_HEIGHT, SPACE_WIDTH, string[i]);
+   }
+
+
+   /*************************************
+     And, print the banner out to STDOUT
+    *************************************/
+
+   print_banner(banner, LETTER_HEIGHT);
+
 }
 

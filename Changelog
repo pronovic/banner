@@ -1,20 +1,26 @@
+1.2.3		17 Apr 2004
+
+	* Add support for whitespace in output (closes: #10).
+	* Convert all 'long' variable to 'int' instead.
+	* Use tabs in Changelog to match Vim's syntax file.
+
 1.2.2    08 Sep 2003
 
-   * Converted file headers to new Cedar Solutions standard.
-   * Removed all references to Cedar Solutions, Inc.
-   * Added config.guess as needed for newer versions of Automake.
-   * Cleaned up some documentation; added details to README.
-   * Updated the usage display in banner.c.
-   * Added this Changelog file.
+	* Converted file headers to new Cedar Solutions standard.
+	* Removed all references to Cedar Solutions, Inc.
+	* Added config.guess as needed for newer versions of Automake.
+	* Cleaned up some documentation; added details to README.
+	* Updated the usage display in banner.c.
+	* Added this Changelog file.
 
 1.2.1    07 Sep 2001
 
-   * Minor changes for initial public release.
+	* Minor changes for initial public release.
 
 1.2.0    11 Jun 2000
    
-   * Initial release for private use.
+	* Initial release for private use.
 
 -----------------------------------------------------------------------------
-vim: set ft=changelog:
+vim: set ft=changelog noexpandtab:
 
