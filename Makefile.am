@@ -13,7 +13,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-AUTOMAKE_OPTIONS = foreign no-dependencies 
+AUTOMAKE_OPTIONS = no-dependencies 
 INCLUDES = -I@srcdir@
 bin_PROGRAMS = banner
 banner_SOURCES = banner.c letters.h

@@ -84,7 +84,7 @@ PACKAGE = @PACKAGE@
 PACKAGE_NAME = @PACKAGE_NAME@
 VERSION = @VERSION@
 
-AUTOMAKE_OPTIONS = foreign no-dependencies 
+AUTOMAKE_OPTIONS = no-dependencies 
 INCLUDES = -I@srcdir@
 bin_PROGRAMS = banner
 banner_SOURCES = banner.c letters.h
@@ -107,9 +107,9 @@ CFLAGS = @CFLAGS@
 COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(LDFLAGS) -o $@
-DIST_COMMON =  README ./stamp-h.in AUTHORS COPYING INSTALL Makefile.am \
-Makefile.in aclocal.m4 config.guess config.h.in config.sub configure \
-configure.in install-sh missing mkinstalldirs
+DIST_COMMON =  README ./stamp-h.in AUTHORS COPYING ChangeLog INSTALL \
+Makefile.am Makefile.in NEWS aclocal.m4 config.guess config.h.in \
+config.sub configure configure.in install-sh missing mkinstalldirs
 
 
 DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
@@ -123,7 +123,7 @@ all: all-redirect
 .SUFFIXES:
 .SUFFIXES: .S .c .o .s
 $(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
-	cd $(top_srcdir) && $(AUTOMAKE) --foreign Makefile
+	cd $(top_srcdir) && $(AUTOMAKE) --gnu Makefile
 
 Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) \
