@@ -26,7 +26,7 @@
  * Language : ANSI C
  * Project  : banner
  * Package  : N/A
- * Revision : $Revision: 1.2 $
+ * Revision : $Id: letters.h,v 1.3 2002/04/04 20:25:59 pronovic Exp $
  * Purpose  : Main routine and function definitions
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */

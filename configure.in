@@ -26,7 +26,7 @@ dnl # Author   : Kenneth J. Pronovici
 dnl # Language : N/A
 dnl # Project  : banner
 dnl # Package  : N/A
-dnl # Revision : $Revision: 1.4 $
+dnl # Revision : $Id: configure.in,v 1.5 2002/04/04 20:25:59 pronovic Exp $
 dnl # Purpose  : Autoconf configure source script.
 dnl #
 dnl # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

@@ -26,7 +26,7 @@
  * Language : ANSI C
  * Project  : banner
  * Package  : N/A
- * Revision : $Revision: 1.3 $
+ * Revision : $Id: banner.c,v 1.4 2002/04/04 20:25:59 pronovic Exp $
  * Purpose  : Main routine and function definitions
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -255,7 +255,7 @@ void convert_to_upper(char *string)
 void usage(char *program)
 {
    printf("Usage:\t%s \"string to print... (max %d characters)\" [--help]\n"
-          "\nThis is %s %s, last modified $Date: 2001/09/05 20:51:20 $.\n"
+          "\nThis is %s %s, last modified $Date: 2002/04/04 20:25:59 $.\n"
           "Copyright (c) %s %s <%s>.\n"
           "Distributed under the GNU General Public License.\n"
           "See %s for details on the GNU GPL.\n",

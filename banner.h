@@ -26,7 +26,7 @@
  * Language : ANSI C
  * Project  : banner
  * Package  : N/A
- * Revision : $Revision: 1.2 $
+ * Revision : $Id: banner.h,v 1.3 2002/04/04 20:25:59 pronovic Exp $
  * Purpose  : Main header file
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */

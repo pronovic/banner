@@ -26,7 +26,7 @@
 # Language : N/A
 # Project  : banner
 # Package  : N/A
-# Revision : $Revision: 1.3 $
+# Revision : $Id: Makefile.am,v 1.4 2002/04/04 20:25:59 pronovic Exp $
 # Purpose  : Input to automake for project
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
