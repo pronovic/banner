@@ -392,8 +392,7 @@ WARN_LOGFILE           =
 # with spaces.
 
 INPUT                  = banner.c \
-                         letters.h \
-                         config.h
+                         letters.h
 
 # If the value of the INPUT tag contains directories, you can use the 
 # FILE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp 
