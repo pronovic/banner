@@ -114,6 +114,8 @@
   Included files
  ****************/
 
+#include "config.h"
+
 #include <stdio.h>
 
 #ifdef HAVE_STDLIB_H
@@ -125,7 +127,6 @@
 #endif
 
 #include "letters.h"
-#include "config.h"
 
 
 /******************

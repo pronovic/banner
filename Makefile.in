@@ -20,7 +20,7 @@
 #
 # Author   : Kenneth J. Pronovici <pronovic@ieee.org>
 # Project  : banner
-# Revision : $Id: Makefile.am 315 2003-10-15 04:14:40Z pronovic $
+# Revision : $Id: Makefile.am 385 2004-04-17 21:17:00Z pronovic $
 # Purpose  : Input to automake for project
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -87,7 +87,7 @@ VERSION = @VERSION@
 AUTOMAKE_OPTIONS = foreign no-dependencies 
 INCLUDES = -I@srcdir@
 bin_PROGRAMS = banner
-banner_SOURCES = banner.c banner.h letters.h
+banner_SOURCES = banner.c letters.h
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = config.h
