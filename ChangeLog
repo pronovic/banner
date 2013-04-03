@@ -4,7 +4,7 @@
 	* Upgrade to autconf 2.69 and automake 1.11.6 for Fedora.
 	* Grab latest config.sub and config.guess from Debian autotools-dev.
 	* Update --help output to note that $COLUMNS must be exported.
-	* Add a manpage banner.1 and updated the --help text to match.
+	* Add a manpage banner.1 and update the --help text to match.
 
 1.3.2		26 Feb 2007
 
