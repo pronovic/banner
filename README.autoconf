@@ -1,0 +1,16 @@
+Notes for myself about updating autoconf and automake.
+
+All of this should be run from some environment with the latest autoconf,
+automake, and autotools-dev installed.  Most recently (2013), I used my
+unstable-amd64 chroot because Debian stable did not have autoconf 2.69 as
+requested by Fedora.
+
+cd ~/projects/dev/software/banner
+autoreconf --force -i
+cp -f /usr/share/misc/config.guess config.guess
+cp -f /usr/share/misc/config.sub config.sub
+
+That should take care of everything.  You probably also want to update
+various copyright statements by hand.
+
+KJP 04/02/2013
