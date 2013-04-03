@@ -561,10 +561,11 @@ static void print_banner(char **banner)
 
 static void usage(char *program)
 {
-   printf("Usage: %s [string | --help]\n"
+   printf("Usage: %s string\n"
           "\n"
           "This is a classic-style banner program similar to the one found in Solaris or\n"
-          "AIX.  It prints a short string to the console in very large letters.\n"
+          "AIX in the late 1990s.  It prints a short string to the console in very large\n"
+          "letters.\n"
           "\n"
           "If $COLUMNS is exported in the environment, it is taken to be the width of the\n"
           "terminal. Otherwise, a terminal width of %d characters is assumed, and banners\n"

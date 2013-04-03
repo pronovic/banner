@@ -17,19 +17,21 @@
 banner \- prints a short string to the console in very large letters
 .SH SYNOPSIS
 .B banner
-[\fIstring | \-\-help\fR]
+\fIstring\fR
 .SH DESCRIPTION
 .PP
 This is a classic-style banner program similar to the one found in Solaris or
-AIX.  It prints a short string to the console in very large letters.
+AIX in the late 1990s.  It prints a short string to the console in very large
+letters.
 .PP
 If $COLUMNS is exported in the environment, it is taken to be the width of
 the terminal. Otherwise, a terminal width of 80 characters is assumed, and
 banners that do not fit will be truncated.
 .PP
-Using the program is easy, for instance:
-
+Usage is straightforward.  For instance, a single word is printed like this:
+.PP
    > banner ken
+   
    #    #  #######  #     #
    #   #   #        ##    #
    #  #    #        # #   #
@@ -37,6 +39,39 @@ Using the program is easy, for instance:
    #  #    #        #   # #
    #   #   #        #    ##
    #    #  #######  #     #
+.PP
+Multiple arguments are printed on separate lines:
+.PP
+   > banner one two  
+   
+   #######  #     #  #######  
+   #     #  ##    #  #        
+   #     #  # #   #  #        
+   #     #  #  #  #  #####    
+   #     #  #   # #  #        
+   #     #  #    ##  #        
+   #######  #     #  #######  
+      
+   
+   #######  #     #  #######  
+      #     #  #  #  #     #  
+      #     #  #  #  #     #  
+      #     #  #  #  #     #  
+      #     #  #  #  #     #  
+      #     #  #  #  #     #  
+      #      ## ##   ####### 
+.PP
+To get a single long line containing whitespace, you must quote the string:
+.PP
+   > banner "one two"
+   
+   #######  #     #  #######        #######  #     #  #######  
+   #     #  ##    #  #                 #     #  #  #  #     #  
+   #     #  # #   #  #                 #     #  #  #  #     #  
+   #     #  #  #  #  #####             #     #  #  #  #     #  
+   #     #  #   # #  #                 #     #  #  #  #     #  
+   #     #  #    ##  #                 #     #  #  #  #     #  
+   #######  #     #  #######           #      ## ##   #######  
 
 .SH COMPATIBILITY
 .PP

@@ -15,7 +15,8 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 This is a classic-style banner program similar to the one found in Solaris
-or AIX.  It prints a short string to the console in very large letters.
+or AIX in the late 1990s.  It prints a short string to the console in very
+large letters.
 
 This is the default banner implementation for some Linux distributions,
 such as Gentoo and Fedora.  Other distributions like Debian have a
