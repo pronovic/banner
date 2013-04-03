@@ -1,0 +1,64 @@
+.\" vim: set ft=nroff .\"
+.\" # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+.\" #
+.\" #              C E D A R
+.\" #          S O L U T I O N S       "Software done right."
+.\" #           S O F T W A R E
+.\" #
+.\" # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+.\" #
+.\" # Author   : Kenneth J. Pronovici <pronovic@ieee.org>
+.\" # Project  : banner
+.\" # Purpose  : Manpage for the banner program
+.\" #
+.\" # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+.TH banner "1" "April 2013" "Banner" "Kenneth J. Pronovici"
+.SH NAME
+banner \- prints a short string to the console in very large letters
+.SH SYNOPSIS
+.B banner
+[\fIstring | \-\-help\fR]
+.SH DESCRIPTION
+.PP
+This is a classic-style banner program similar to the one found in Solaris or
+AIX.  It prints a short string to the console in very large letters.
+.PP
+If $COLUMNS is exported in the environment, it is taken to be the width of
+the terminal. Otherwise, a terminal width of 80 characters is assumed, and
+banners that do not fit will be truncated.
+.PP
+Using the program is easy, for instance:
+
+   > banner ken
+   #    #  #######  #     #
+   #   #   #        ##    #
+   #  #    #        # #   #
+   ###     #####    #  #  #
+   #  #    #        #   # #
+   #   #   #        #    ##
+   #    #  #######  #     #
+
+.SH COMPATIBILITY
+.PP
+From time to time, people assert that this program is buggy because it
+doesn't do something that some other banner implementation does.  The
+behavior of the program is based on what I saw on Solaris and AIX systems
+at the time I wrote it in the late 1990s.  I make no claims that the
+behavior is identical to that of any other contemporary system, especially
+any non-free system that I may or may not have access to. 
+.PP
+If you don't like the behavior, you can either submit a patch, or you can
+use an alternative program such as figlet.  I am always happy to accept
+patches, and I promise to integrate patches promptly if provided.  So far,
+no one who's complained has bothered to provide any patches, so the
+behavior remains the same.
+.SH BUGS
+Report bugs to <support@cedar\-solutions.com>.
+.SH AUTHOR
+Written by Kenneth J. Pronovici <pronovic@ieee.org>.
+.SH COPYRIGHT
+Copyright (c) 2000\-2004.2007,2013 Kenneth J. Pronovici.
+.br
+This is free software; see the source for copying conditions.  There is
+NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.
