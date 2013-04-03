@@ -1,4 +1,4 @@
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+## # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 #              C E D A R
 #          S O L U T I O N S       "Software done right."
@@ -16,4 +16,5 @@
 AUTOMAKE_OPTIONS = no-dependencies 
 INCLUDES = -I@srcdir@
 bin_PROGRAMS = banner
-banner_SOURCES = banner.c letters.h
+banner_SOURCES = banner.c letters.h banner.1
+man_MANS = banner.1

@@ -5,12 +5,16 @@ automake, and autotools-dev installed.  Most recently (2013), I used my
 unstable-amd64 chroot because Debian stable did not have autoconf 2.69 as
 requested by Fedora.
 
-Make sure you update configure.in to change the version, copyright, etc.
-if necessary.
+Make sure you update configure.in to change the version, copyright, etc., 
+if necessary. 
 
 autoreconf --force -i
 cp -f /usr/share/misc/config.guess config.guess
 cp -f /usr/share/misc/config.sub config.sub
+
+To rebuild a distribution, I usually use:
+
+./configure && make dist-gzip && make distclean
 
 That should take care of everything.  You probably also want to update
 various copyright statements by hand.
