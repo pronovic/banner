@@ -149,7 +149,7 @@
 #define GNU_URL            ("http://www.gnu.org/")
 
 /** Copyright year range */
-#define COPYRIGHT_DATE     ("2000-2004")
+#define COPYRIGHT_DATE     ("2000-2004,2007,2013")
 
 /** Name of author */
 #define AUTHOR             ("Kenneth J. Pronovici")
@@ -564,7 +564,7 @@ static void usage(char *program)
    printf("Usage: %s [string | --help]\n"
           "\n"
           "Prints a \"banner\" version of a string to STDOUT.  If $COLUMNS is\n"
-          "set in the environment, it is taken to be the width of the terminal.\n"
+          "exported in the environment, it is taken to be the width of the terminal.\n"
           "Otherwise, a terminal width of %d characters is assumed, and banners\n"
           "that do not fit will be truncated.\n"
           "\n"
