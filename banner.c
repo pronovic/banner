@@ -126,6 +126,9 @@
    #include <string.h>
 #endif
 
+#include <termios.h>
+#include <sys/ioctl.h>
+
 #include "letters.h"
 
 
@@ -660,6 +663,13 @@ int main(int argc, char *argv[])
    columns = getenv("COLUMNS");
    if(columns == NULL)
    {
+#ifdef TIOCGWINSZ
+      struct winsize ws;
+      ws.ws_col = 0;
+      if (!ioctl(1, TIOCGWINSZ, &ws) && ws.ws_col > 0)
+	printwidth = ws.ws_col;
+      else
+#endif
       printwidth = DEFAULT_PRINTWIDTH;
    }
    else
