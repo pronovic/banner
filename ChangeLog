@@ -2,6 +2,7 @@
 
 	* Integrate patch from Jurgen Weigert, to enhance terminal width detection.
 	* Upgrade to Debian's autconf 2.69-8 and automake 1.14.1-3 to stay up-to-date.
+	* Update help and manpage to note support for TIOCGWINSZ in addition to $COLUMNS.
 
 1.3.3		02 Apr 2013
 
