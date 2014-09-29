@@ -667,7 +667,7 @@ int main(int argc, char *argv[])
       struct winsize ws;
       ws.ws_col = 0;
       if (!ioctl(1, TIOCGWINSZ, &ws) && ws.ws_col > 0)
-	printwidth = ws.ws_col;
+	      printwidth = ws.ws_col;
       else
 #endif
       printwidth = DEFAULT_PRINTWIDTH;
