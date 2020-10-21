@@ -1,3 +1,9 @@
 autom4te.cache
 *.o
 banner
+Makefile
+config.h
+config.log
+config.status
+stamp-*
+banner-*.tar.gz

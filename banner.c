@@ -125,6 +125,10 @@
    #include <string.h>
 #endif
 
+#ifdef HAVE_CTYPE_H
+   #include <ctype.h>
+#endif
+
 #include <termios.h>
 #include <sys/ioctl.h>
 

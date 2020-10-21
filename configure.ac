@@ -49,7 +49,7 @@ AC_PROG_INSTALL
 
 dnl Checks for header files.
 AC_HEADER_STDC
-AC_CHECK_HEADERS([stdlib.h string.h])
+AC_CHECK_HEADERS([stdlib.h string.h ctype.h])
 
 dnl Output these files
 AC_OUTPUT(Makefile)
