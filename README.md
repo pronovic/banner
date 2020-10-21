@@ -57,10 +57,10 @@ behavior is identical to that of any other contemporary system, especially
 any non-free system that I may or may not have access to. 
 
 If you don't like the behavior, you can either submit a pull request, or
-you can use an alternative program such as `figlet`.  I am always happy to
-accept pull requests, and I promise to merge them promptly if provided.  So
-far, no one who's complained has bothered to provide any patches, so the
-behavior remains the same.
+you can use an alternative program such as [figlet](http://www.figlet.org/).  I 
+am always happy to accept pull requests, and I promise to merge them promptly
+if provided.  So far, no one who's complained has bothered to provide any
+patches, so the behavior remains the same.
 
 ## Supported Platforms
 
