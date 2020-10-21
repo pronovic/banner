@@ -8,7 +8,6 @@
 #
 # Author   : Kenneth J. Pronovici <pronovic@ieee.org>
 # Project  : banner
-# Revision : $Id$
 # Purpose  : Input to automake for project
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

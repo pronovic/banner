@@ -1,3 +1,7 @@
+1.3.5    20 Oct 2020
+
+	* Migrate from private Subversion repo to public GitHub.
+
 1.3.4    29 Sep 2014
 
 	* Integrate patch from Jurgen Weigert, to enhance terminal width detection.

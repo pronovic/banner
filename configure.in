@@ -6,7 +6,7 @@ dnl #           S O F T W A R E
 dnl #
 dnl # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 dnl #
-dnl # Copyright (c) 2000-2004,2007,2013,2014 Kenneth J. Pronovici.
+dnl # Copyright (c) 2000-2004,2007,2013,2014,2020 Kenneth J. Pronovici.
 dnl # All rights reserved.
 dnl #
 dnl # This program is free software; you can redistribute it and/or
@@ -26,7 +26,6 @@ dnl # Author   : Kenneth J. Pronovici <pronovic@ieee.org>
 dnl # Language : N/A
 dnl # Project  : banner
 dnl # Package  : N/A
-dnl # Revision : $Id$
 dnl # Purpose  : Autoconf configure source script.
 dnl #
 dnl # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

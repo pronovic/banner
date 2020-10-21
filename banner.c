@@ -6,7 +6,7 @@
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *
- * Copyright (c) 2000-2004.2007,2013,2014 Kenneth J. Pronovici.
+ * Copyright (c) 2000-2004.2007,2013,2014,2020 Kenneth J. Pronovici.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or
@@ -25,7 +25,6 @@
  * Author   : Kenneth J. Pronovici <pronovic@ieee.org>
  * Language : ANSI C
  * Project  : banner
- * Revision : $Id: banner.c 387 2004-04-17 21:23:50Z pronovic $
  * Purpose  : Main routine and function definitions.
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
