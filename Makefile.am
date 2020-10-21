@@ -13,7 +13,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 AUTOMAKE_OPTIONS = no-dependencies 
-INCLUDES = -I@srcdir@
+AM_CPPFLAGS = -I@srcdir@
 bin_PROGRAMS = banner
 banner_SOURCES = banner.c letters.h banner.1
 man_MANS = banner.1

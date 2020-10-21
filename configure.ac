@@ -32,9 +32,10 @@ dnl # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(banner.c)
+AC_INIT([Banner], [1.3.5])
+AC_CONFIG_SRCDIR([banner.c])
+AM_INIT_AUTOMAKE
 
-AM_INIT_AUTOMAKE(banner, 1.3.5)
 AM_CONFIG_HEADER(config.h)
 
 AC_SUBST(PACKAGE_NAME)
