@@ -9,6 +9,11 @@ distributions like Debian have a different implementation.  I am a Debian
 developer and I run Debian on all of my machines, so I don't actually use
 this code on a regular basis any more.
 
+Yeah, yeah, this IS a pretty simple program, and it doesn't really need a
+GNU autoconf setup and all that stuff - it's just ANSI C.  This just gave
+me an excuse to learn autoconf... These days, I maintain it for the sake
+of nostalgia. ;)   
+
 ## History
 
 When I first wrote this code back in the late 1990s, the Linux world was a
@@ -76,13 +81,8 @@ releases on a regular basis just to update these definitions.
 ## Configuration
 
 The code is configurable on a compile-time basis.  The letter definitions
-can be changed by changing the array definitions in "letters.h".  The
+can be changed by changing the array definitions in [`letters.h`](letters.h).  The
 defined letter height, the number of spaces after each letter, the max
 letters of a given string that will be printed, etc. are all controlled
 from in there.  The only real restriction is that all of the letters have
 to be the same height.
-
-Yeah, yeah, this IS a pretty simple program, and it doesn't really need a
-GNU autoconf setup and all that stuff - it's just ANSI C.  This just gave
-me an excuse to learn autoconf... These days, I maintain it for the sake
-of nostalgia. ;)   
