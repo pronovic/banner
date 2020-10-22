@@ -1,5 +1,8 @@
 ## Banner
 
+![](https://img.shields.io/github/v/release/pronovic/banner)
+![](https://github.com/pronovic/banner/workflows/Test%20Suite/badge.svg)
+
 This is a classic-style banner program similar to the one found in Solaris
 or AIX in the late 1990s.  It prints a short string to the console in very
 large letters.
