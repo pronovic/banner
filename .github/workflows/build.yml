@@ -17,8 +17,6 @@ jobs:
     steps: 
       - name: Check out code
         uses: actions/checkout@v2
-      - name: Build the source distribution
-        run: make dist-gzip
       - name: Configure and build the code
         run: ./configure && make
       - name: Print a banner
