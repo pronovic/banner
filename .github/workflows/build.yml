@@ -1,0 +1,29 @@
+name: Test Suite
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  schedule:
+    - cron: '05 17 15 * *'  # 15th of the month at 5:05pm UTC
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    steps: 
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Run configure step
+        run: ./configure
+      - name: Build the source distribution
+        run: make dist-gzip
+      - name: Build the code
+        run: make
+      - name: Print a banner
+        run: ./banner Success!
+      - name: Clean up
+        run: make distclean
