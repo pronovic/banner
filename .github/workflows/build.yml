@@ -17,8 +17,14 @@ jobs:
     steps: 
       - name: Check out code
         uses: actions/checkout@v2
-      - name: Configure and build the code
-        run: ./configure && make
+      - name: Touch all code  # workaround odd autoconf problems
+        run: touch *
+      - name: Run configure step
+        run: ./configure
+      - name: Build the source distribution
+        run: make dist-gzip
+      - name: Build the code
+        run: make
       - name: Print a banner
         run: ./banner Success!
       - name: Clean up
