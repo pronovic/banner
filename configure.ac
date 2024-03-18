@@ -6,7 +6,7 @@ dnl #           S O F T W A R E
 dnl #
 dnl # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 dnl #
-dnl # Copyright (c) 2000-2004,2007,2013,2014,2020 Kenneth J. Pronovici.
+dnl # Copyright (c) 2000-2004,2007,2013,2014,2020,2024 Kenneth J. Pronovici.
 dnl # All rights reserved.
 dnl #
 dnl # This program is free software; you can redistribute it and/or
@@ -32,7 +32,7 @@ dnl # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT([Banner],[1.3.5])
+AC_INIT([Banner],[1.3.6])
 AC_CONFIG_SRCDIR([banner.c])
 AM_INIT_AUTOMAKE
 
