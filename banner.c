@@ -580,7 +580,6 @@ static void usage(char *program)
           "characters is assumed.\n"
           "\n"
           "This is %s %s.\n"
-          "$LastChangedDate$.\n"
           "Copyright (c) %s %s <%s>.\n"
           "\n"
           "Distributed under the GNU General Public License.\n"
