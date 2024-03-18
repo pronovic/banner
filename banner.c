@@ -6,7 +6,7 @@
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *
- * Copyright (c) 2000-2004.2007,2013,2014,2020 Kenneth J. Pronovici.
+ * Copyright (c) 2000-2004.2007,2013,2014,2020,2024 Kenneth J. Pronovici.
  * All rights reserved.
  *
  * This program is free software; you can redistribute it and/or
