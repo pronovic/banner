@@ -1,11 +1,9 @@
 Notes for myself about updating autoconf and automake.
 
 All of this should be run from some environment with the latest autoconf,
-automake, and autotools-dev installed.  Most recently (2013), I used my
-unstable-amd64 chroot because Debian stable did not have autoconf 2.69 as
-requested by Fedora.
+automake, and autotools-dev installed.
 
-Make sure you update configure.in to change the version, copyright, etc., 
+Make sure you update configure.ac to change the version, copyright, etc., 
 if necessary. 
 
 autoreconf --force -i
