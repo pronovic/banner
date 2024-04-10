@@ -503,7 +503,7 @@ char *char_dolr[] =
   "#  #  #",
   " ##### " };
 
-/** Character '%' (dollar sign) */
+/** Character '%' (percent sign) */
 char *char_prct[] =
 { "###   #",
   "# #  # ",
